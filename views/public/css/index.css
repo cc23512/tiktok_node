@@ -1,8 +1,141 @@
-body{
-    background-color: blue;
-    
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
 }
 
-h2 {
-    font-family: 'Gilroy SemiBold';
+:root {
+  --bold: "Gilroy Bold";
+  --heavy: "Gilroy Heavy";
+  --light: "Gilroy Light";
+  --medium: "Gilroy Medium";
+  --regular: "Gilroy Regular";
+  --semiBold: "Gilroy SemiBold";
+  --thin: "Giltoy Thin";
+
+  --cinza: #f1f1f2;
+  --cinza-escuro: #adadb2;
+  --cinza-mais-escuro: #55575f;
+
+  --vermelho-rosa: #fe2c55;
+}
+
+body {
+  font-family: var(--medium);
+}
+
+header {
+  position: relative;
+  width: 100%;
+  height: 70px;
+  background: rgb(8, 9, 19);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid blue;
+}
+
+.tiktok-logo {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  font-family: var(--bold);
+  font-style: italic;
+  padding: 4%;
+}
+
+.navbar {
+  position: relative;
+  width: auto;
+  padding: 5%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.navbar ul {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.navbar a {
+  border: 1px solid var(--cinza-escuro);
+  padding: 0.4rem 1.2rem;
+  border-radius: 2px;
+  font-family: var(--semiBold);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.navbar a#upload:hover {
+  background-color: #55575fb4;
+}
+
+.navbar a#upload i {
+  margin-right: 0.2rem;
+  font-size: 1.5rem;
+}
+
+.navbar a#login {
+  padding: 0.54rem 1.5rem;
+  background: var(--vermelho-rosa);
+  border-color: transparent;
+}
+
+.navbar a#login:hover {
+  background-color: #fe2c56cb;
+}
+
+.search {
+  position: relative;
+  width: 40%;
+}
+
+.search input {
+  width: 96%;
+  height: 45px;
+  border: 1px solid #d7d7d7;
+  border-radius: 80px;
+  background: var(--cinza);
+  padding: 2%;
+  text-indent: 15px;
+  font-size: 1.1rem;
+  font-family: var(--semiBold);
+  outline: none;
+}
+
+.search input::placeholder {
+  color: var(--cinza-mais-escuro);
+}
+
+.search i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 2.4rem;
+  color: black;
+  font-size: 1.4rem;
+  color: var(--cinza-escuro);
+}
+
+.search i::after {
+  position: absolute;
+  content: "";
+  top: 50%;
+  transform: translateY(-50%);
+  left: -0.6rem;
+  width: 1px;
+  height: 30px;
+  background: var(--cinza-escuro);
+  border-radius: 20px;
 }
