@@ -66,6 +66,7 @@ header {
 }
 
 .navbar a {
+  position: relative;
   border: 1px solid var(--cinza-escuro);
   padding: 0.4rem 1.2rem;
   border-radius: 2px;
@@ -138,4 +139,31 @@ header {
   height: 30px;
   background: var(--cinza-escuro);
   border-radius: 20px;
+}
+@media (max-width: 850px) {
+  .navbar {
+    padding: 2%;
+  }
+
+  .navbar ul {
+    gap: 0;
+  }
+
+  .navbar a#upload {
+    display: none;
+  }
+
+  .search i {
+    right: 1.7rem;
+  }
+}
+
+@media (max-width: 525px) {
+  .navbar {
+    padding: 7%;
+  }
+
+  .search {
+    display: none;
+  }
 }
