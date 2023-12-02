@@ -4,6 +4,9 @@ module.exports = (app) => {
     next();
   });
 
+  const tikTokController = require("../controllers/con_ttk");
+  const tikController = new tikTokController();
+
   app.get("/", (req, res) => {
     res.send("Aoba");
   });
@@ -11,4 +14,7 @@ module.exports = (app) => {
   app.get("/home", (req, res) => {
     res.render("index");
   });
+
+  app.post("/inserirUsuario", tikController.inserirUsuario());
+  app.post("/loginUsuario", tikController.loginUsuario());
 };
