@@ -1,6 +1,7 @@
+// routes.js
 module.exports = (app) => {
   app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Orign", "*");
+    res.header("Access-Control-Allow-Origin", "*");
     next();
   });
 
@@ -16,5 +17,24 @@ module.exports = (app) => {
   });
 
   app.post("/inserirUsuario", tikController.inserirUsuario());
-  app.post("/loginUsuario", tikController.loginUsuario());
+  app.post("/loginUsuario", (req, res) => {
+    const { email, senha } = req.body;
+
+    tikController
+      .loginUsuario(email, senha)
+      .then((usuario) => {
+        if (usuario) {
+          req.session.user = usuario;
+          console.log(usuario);
+          res.send("aoba");
+        } else {
+          res.send("deu errado");
+          console.log("informações incorretas");
+        }
+      })
+      .catch((erro) => {
+        console.log(erro);
+        res.send("erro");
+      });
+  });
 };

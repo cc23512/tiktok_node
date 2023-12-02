@@ -1,3 +1,4 @@
+// dao_ttk.js
 class tikTokDAO {
   constructor(bd) {
     this._bd = bd;
@@ -22,7 +23,7 @@ class tikTokDAO {
     return new Promise((resolve, reject) => {
       const sql =
         "SELECT * FROM tiktok_user WHERE email_user = ? AND senha_user = ?";
-      this._bd.query(sql, [email, senha], (erro) => {
+      this._bd.query(sql, [email, senha], (erro, resultados) => {
         if (erro) {
           console.log(erro);
           return reject("informações de login incorretas");
@@ -31,7 +32,7 @@ class tikTokDAO {
           return resolve(null); // nenhum usuario encontrado
         }
         const usuario = resultados[0];
-        resolve(usuario); // intancia o usuario;
+        resolve(usuario); // intancia o usuario
       });
     });
   }

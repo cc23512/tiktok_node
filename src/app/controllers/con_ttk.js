@@ -1,3 +1,4 @@
+// con_ttk.js
 const tikTokDAO = require("../bd/dao_ttk");
 const bd = require("../../config/database");
 
@@ -20,27 +21,20 @@ class tiktokCON {
     };
   }
 
-  loginUsuario() {
-    return function (req, res) {
-      const usuarioDAO = tikTokDAO(bd);
-      const { email, senha } = req.body;
+  loginUsuario(email, senha) {
+    return new Promise((resolve, reject) => {
+      const usuarioDAO = new tikTokDAO(bd);
+
       usuarioDAO
         .loginUsuario(email, senha)
         .then((usuario) => {
-          if (usuario) {
-            req.session.user = usuario;
-            console.log(usuario);
-            res.redirect("/");
-          } else {
-            res.send("informações incorretas");
-            console.log("informações incorretas");
-          }
+          resolve(usuario);
         })
         .catch((erro) => {
           console.log(erro);
-          res.redirect("/");
+          reject("erro ao verificar login");
         });
-    };
+    });
   }
 }
 
