@@ -42,17 +42,29 @@
 
     <div id="modal" class="modal">
       <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <h2>Entrar</h2>
+        <span class="close" onclick="closeModal()"
+          ><i class="ri-close-fill"></i
+        ></span>
+        <h2>Entrar no Tik Tok</h2>
         <form id="loginForm">
-          <label for="name">Nome:</label>
-          <input type="text" id="name" name="name" required />
+          <div class="label-group">
+            <label for="email">Email</label> <br />
+            <i class="ri-mail-line"></i
+            ><input type="email" id="email" name="email" required />
+          </div>
+          <br />
 
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" required />
+          <div class="label-group">
+            <label for="senha">Senha</label> <br />
+            <i class="ri-lock-line"></i
+            ><input type="password" id="senha" name="senha" required /><br />
+          </div>
 
-          <input type="submit" value="Entrar" />
+          <button type="submit" class="btn">Entrar</button>
         </form>
+        <div class="footer-form">
+          <p>Não tem uma conta? <a href="#"> Criar conta</a></p>
+        </div>
       </div>
     </div>
 

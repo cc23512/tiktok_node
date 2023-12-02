@@ -20,6 +20,7 @@
   --cinza-mais-escuro: #55575f;
 
   --vermelho-rosa: #fe2c55;
+  --branco-close: #f8f8f8;
 }
 
 body {
@@ -186,6 +187,10 @@ header {
   border-radius: 10px;
   position: relative;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  max-width: 450px;
+  height: 550px;
 }
 
 .close {
@@ -194,4 +199,99 @@ header {
   right: 10px;
   font-size: 20px;
   cursor: pointer;
+}
+
+.modal-content i .ri-close-fill {
+  color: #161823;
+  padding: 0.5rem;
+  font-size: 2rem;
+  background: var(--branco-close);
+  border-radius: 50%;
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  transition: all 1s;
+}
+
+.modal-content h2 {
+  margin-top: 3.5rem;
+  font-size: 2rem;
+  font-family: var(--bold);
+}
+
+.modal-content form {
+  text-align: left;
+  padding: 30px;
+}
+
+.modal-content label {
+  font-family: var(--semiBold);
+  font-size: 1.1rem;
+}
+
+.label-group {
+  position: relative;
+}
+
+.modal-content form button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 1.4rem;
+  font-family: var(--bold);
+  font-size: 0.8;
+  border: none;
+  background: var(--vermelho-rosa);
+  cursor: pointer;
+  color: #fff;
+  border-radius: 20px;
+  transition: all 0.2s;
+}
+
+.modal-content form button:hover {
+  background-color: #e3163f;
+}
+
+.modal-content input {
+  border: 2px solid rgba(22, 24, 35, 0.12);
+  border-radius: 5px;
+  width: 100%;
+  outline: none;
+  padding: 5px 40px;
+  margin-top: 0.5rem;
+  font-family: var(--semiBold);
+  font-size: 1.1rem;
+  background: var(--cinza);
+  color: var(--cinza-mais-escuro);
+}
+
+.modal-content form i {
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(5%);
+  color: var(--cinza-escuro);
+  font-size: 1.5rem;
+}
+
+.modal-content .footer-form {
+  position: relative;
+  bottom: 0;
+  left: 0;
+}
+
+.modal-content .footer-form p {
+  margin-top: 8rem;
+  font-family: var(--semiBold);
+}
+
+.modal-content .footer-form a {
+  color: var(--vermelho-rosa);
+  font-family: var(--bold);
+}
+
+.modal-content .footer-form a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 850px) {
 }

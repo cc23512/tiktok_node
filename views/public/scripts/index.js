@@ -1,4 +1,3 @@
-// Adicione estas linhas no início do seu script ou em um novo script
 const modal = document.getElementById("modal");
 const loginButton = document.getElementById("login");
 const loginForm = document.getElementById("loginForm");
@@ -16,8 +15,5 @@ function closeModal() {
 
 function handleSubmit(event) {
   event.preventDefault();
-
-  // Adicione lógica para processar o formulário aqui
-
   closeModal();
 }
