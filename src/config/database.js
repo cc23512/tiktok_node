@@ -10,10 +10,10 @@ const pool = mysql.createPool({
 
 pool.getConnection(function (err, connection) {
   if (err) {
-    console.log("erro na conexão com o BD23512");
+    console.log("erro na conexão com o bd");
     console.log(err);
   } else {
-    console.log("conexão CONECTADA BD23512");
+    console.log("conexão com bd certinha");
     // Realize suas operações no banco de dados aqui
     connection.release();
   }
