@@ -1,19 +1,22 @@
 const mysql = require("mysql2");
 
-const connection = mysql.createConnection({
-    host: 'regulus.cotuca.unicamp.br',
-    user: 'BD23512',
-    password: 'BD23512',
-    database: 'BD23512',
-})
+const pool = mysql.createPool({
+  host: "monorail.proxy.rlwy.net",
+  user: "root",
+  password: "aCCC6G423-h56-41246a3aBhFdC1DADe",
+  database: "railway",
+  port: "15244",
+});
 
-connection.connect(function (erro) {
-    if (erro) {
-        console.log("erro na conexão com o BD23512");
-        console.log(erro);
-    } else {
-        console.log("conexão CONECTADA BD23512");
-    }
-})
+pool.getConnection(function (err, connection) {
+  if (err) {
+    console.log("erro na conexão com o BD23512");
+    console.log(err);
+  } else {
+    console.log("conexão CONECTADA BD23512");
+    // Realize suas operações no banco de dados aqui
+    connection.release();
+  }
+});
 
-module.exports = connection;
+module.exports = pool;
