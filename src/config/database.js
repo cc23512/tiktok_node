@@ -14,7 +14,6 @@ pool.getConnection(function (err, connection) {
     console.log(err);
   } else {
     console.log("conexão com bd certinha");
-    // Realize suas operações no banco de dados aqui
     connection.release();
   }
 });
