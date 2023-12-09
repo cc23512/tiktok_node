@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TikTok | Home</title>
     <!-- CSS FONTS -->
     <link rel="stylesheet" href="./public/css/fonts.css" />
     <!-- CSS PAGINA -->
@@ -13,6 +12,10 @@
       href="https://cdn.jsdelivr.net/npm/remixicon@3.6.0/fonts/remixicon.css"
       rel="stylesheet"
     />
+    <!-- JS -->
+    <script src="./public/scripts/index.js"></script>
+
+    <title>TikTok | Home</title>
   </head>
   <body>
     <header>
@@ -33,35 +36,37 @@
               </a>
             </li>
             <li>
-              <a href="#" id="login">Entrar</a>
+              <a href="#" id="login" onclick="abrirModal()">Entrar</a>
             </li>
           </ul>
         </nav>
       </div>
     </header>
 
-    <div id="modal" class="modal">
+     <div id="modal" class="modal">
       <div class="modal-content">
-        <span class="close" onclick="closeModal()">
-          <i class="ri-close-fill"></i>
-        </span>
+        <span class="close" onclick="fecharModal()">&times;</span>
         <div id="loginForm" class="form-container">
           <h2>Entrar no Tik Tok</h2>
+
           <form action="/loginUsuario" method="post">
+
             <div class="label-group">
               <label for="email">Email</label> <br />
               <i class="ri-mail-line"></i
-              ><input type="email" id="email" name="email" required />
+              ><input type="text" name="email" placeholder="Email" required />
             </div>
             <br />
 
             <div class="label-group">
               <label for="senha">Senha</label> <br />
               <i class="ri-lock-line"></i
-              ><input type="password" id="senha" name="senha" required /><br />
+              ><input type="password" name="senha" placeholder="Senha" required /><br />
             </div>
-            <button type="submit" class="btn">Entrar</button>
+            
+            <button type="submit">Entrar</button>
           </form>
+
           <div class="footer-form">
             <p>
               Não tem uma conta?
@@ -69,48 +74,7 @@
             </p>
           </div>
         </div>
-
-        <div id="signupForm" class="form-container" style="display: none">
-          <h2>Criar Conta</h2>
-          <form action="/inserirUsuario" method="post">
-            <div class="label-group">
-              <label for="nome">Nome</label> <br />
-              <i class="ri-user-line"></i
-              ><input type="text" id="nome" name="nome" required />
-            </div>
-            <br />
-
-            <div class="label-group">
-              <label for="apelido">Username</label> <br />
-              <i class="ri-at-line"></i
-              ><input type="text" id="apelido" name="apelido" required />
-            </div>
-            <br />
-
-            <div class="label-group">
-              <label for="email">Email</label> <br />
-              <i class="ri-mail-line"></i
-              ><input type="email" id="email" name="email" required />
-            </div>
-            <br />
-
-            <div class="label-group">
-              <label for="senha">Senha</label> <br />
-              <i class="ri-lock-line"></i
-              ><input type="password" id="senha" name="senha" required /><br />
-            </div>
-
-            <button type="submit" class="btn">Criar Conta</button>
-          </form>
-          <div class="footer-form">
-            <p>
-              Já tem uma conta? <a href="#" onclick="showLoginForm()">Entrar</a>
-            </p>
-          </div>
-        </div>
-      </div>
     </div>
 
-    <script src="./public/scripts/index.js"></script>
   </body>
 </html>

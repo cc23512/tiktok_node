@@ -1,4 +1,3 @@
-// dao_ttk.js
 class tikTokDAO {
   constructor(bd) {
     this._bd = bd;
@@ -19,20 +18,23 @@ class tikTokDAO {
     });
   }
 
-  loginUsuario(email, senha) {
+  autenticarUsuario(email, senha) {
     return new Promise((resolve, reject) => {
       const sql =
         "SELECT * FROM tiktok_user WHERE email_user = ? AND senha_user = ?";
       this._bd.query(sql, [email, senha], (erro, resultados) => {
         if (erro) {
-          console.log(erro);
-          return reject("informações de login incorretas");
+          console.error("Erro na consulta SQL:", erro);
+          return reject("Erro ao autenticar usuário");
         }
-        if (resultados.length === 0) {
-          return resolve(null); // nenhum usuario encontrado
+
+        if (resultados.length > 0) {
+          console.log("Usuário autenticado:", resultados[0]);
+          resolve(resultados[0]);
+        } else {
+          console.log("Usuário não encontrado");
+          resolve(null);
         }
-        const usuario = resultados[0];
-        resolve(usuario); // intancia o usuario
       });
     });
   }
