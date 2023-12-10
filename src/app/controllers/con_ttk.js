@@ -36,7 +36,7 @@ class tiktokCON {
               apelido: usuario.apelido,
               email: usuario.email,
             };
-            res.send("chegou aqui o menino");
+            res.redirect("/home");
           } else {
             res.status(401).send("Credenciais inválidas");
           }

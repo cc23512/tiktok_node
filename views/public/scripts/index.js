@@ -21,3 +21,13 @@ function voltaParaLoginForm() {
   // mostra form cadastro
   document.getElementById("loginForm").style.display = "block";
 }
+
+// POP UP
+function abrirPopup(mensagem) {
+  document.getElementById("popup-message").innerHTML = mensagem;
+  document.getElementById("popup").style.display = "block";
+}
+
+function fecharPopup() {
+  document.getElementById("popup").style.display = "none";
+}

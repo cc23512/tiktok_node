@@ -12,11 +12,22 @@ module.exports = (app) => {
   });
 
   app.get("/home", (req, res) => {
-    res.render("index");
+    // armazena as info do usuario para aparecer quando ele logar
+    const user = req.session.user;
+    res.render("index", { user: user });
   });
 
   app.get("/formLogin", (req, res) => {
     res.render("test");
+  });
+
+  app.get("/test", (req, res) => {
+    if (req.session.user) {
+      res.render("test");
+    } else {
+      // mostra a mensagem pop up se o usuario nao estiver logado
+      res.render("index", { mostrarPopup: true });
+    }
   });
 
   app.post("/inserirUsuario", tikController.inserirUsuario());

@@ -30,14 +30,23 @@
         <nav>
           <ul>
             <li>
-              <a href="#" id="upload"
-                ><i class="ri-add-line"></i>
-                Carregar
+              <a
+                href="#"
+                id="upload"
+                onclick="<% if (user) { %> window.location.href='/test'; <% } else { %> abrirPopup('Para publicar um vídeo, você precisa estar logado.'); <% } %>"
+              >
+                <i class="ri-add-line"></i> Carregar
               </a>
             </li>
+            <% if (user) { %>
+            <li>
+              <p>Bem-vindo, <%= user.nome %></p>
+            </li>
+            <% } else { %>
             <li>
               <a href="#" id="login" onclick="abrirModal()">Entrar</a>
             </li>
+            <% } %>
           </ul>
         </nav>
       </div>
@@ -123,6 +132,26 @@
           </form>
         </div>
       </div>
+    </div>
+
+    <div id="popup" class="popup">
+      <div class="popup-content">
+        <span class="close" onclick="fecharPopup()">&times;</span>
+        <p id="popup-message"></p>
+      </div>
+    </div>
+
+    <div class="video-container">
+      <div class="user-info">
+        <img src="profile.jpg" alt="Profile Picture" class="profile-picture" />
+        <p class="username">NomeDoUsuario</p>
+      </div>
+      <h1 class="video-title">Título do Vídeo</h1>
+      <p class="music-title">Nome da Música</p>
+      <video controls class="video-player">
+        <source src="video.mp4" type="video/mp4" />
+        Seu navegador não suporta o elemento de vídeo.
+      </video>
     </div>
   </body>
 </html>
