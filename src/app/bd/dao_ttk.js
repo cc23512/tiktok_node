@@ -38,6 +38,21 @@ class tikTokDAO {
       });
     });
   }
+
+  inserirVideo(titulo, videoPath, som, id_user) {
+    return new Promise((resolve, reject) => {
+      const sql =
+        "INSERT INTO tiktok_video (titulo, video, som, id_user) VALUES (?, ?, ?, ?)";
+
+      this._bd.query(sql, [titulo, videoPath, som, id_user], (erro) => {
+        if (erro) {
+          console.log(erro);
+          return reject("Erro ao inserir vídeo");
+        }
+        resolve();
+      });
+    });
+  }
 }
 
 module.exports = tikTokDAO;

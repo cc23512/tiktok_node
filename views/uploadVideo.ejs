@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload de Vídeo</title>
+  </head>
+  <body>
+    <form action="/uploadVideo" method="post" enctype="multipart/form-data">
+      <label for="titulo">Título do Vídeo</label>
+      <input type="text" name="titulo" required /> <br />
+
+      <label for="som">Som</label>
+      <input type="text" name="som" required /> <br />
+
+      <label for="video">Video</label>
+      <input type="file" name="video" />
+      <br />
+
+      <label for="id">Id usuario</label>
+      <input type="text" name="id" id="id" value="<%= user.id %>" readonly />
+      <br />
+      <button type="submit">Enviar</button>
+    </form>
+
+    <a href="/home">Voltar</a>
+  </body>
+</html>

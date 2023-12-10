@@ -17,19 +17,16 @@ module.exports = (app) => {
     res.render("index", { user: user });
   });
 
-  app.get("/formLogin", (req, res) => {
-    res.render("test");
-  });
-
-  app.get("/test", (req, res) => {
-    if (req.session.user) {
-      res.render("test");
+  app.get("/uploadVideo", (req, res) => {
+    const user = req.session.user;
+    if (user) {
+      res.render("uploadVideo", { user: user, req });
     } else {
-      // mostra a mensagem pop up se o usuario nao estiver logado
       res.render("index", { mostrarPopup: true });
     }
   });
 
   app.post("/inserirUsuario", tikController.inserirUsuario());
   app.post("/loginUsuario", tikController.loginUsuario());
+  app.post("/uploadVideo", tikController.inserirVideo());
 };
