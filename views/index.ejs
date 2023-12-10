@@ -141,17 +141,26 @@
       </div>
     </div>
 
-    <div class="video-container">
-      <div class="user-info">
-        <img src="profile.jpg" alt="Profile Picture" class="profile-picture" />
-        <p class="username">NomeDoUsuario</p>
+    <div id="videos">
+      <% videos.forEach(video => { %>
+      <div class="video-container">
+        <div class="user-info">
+          <img
+            src="profile.jpg"
+            alt="Profile Picture"
+            class="profile-picture"
+          />
+          <p class="username"><%= video.nome %> (<%= video.apelido %>)</p>
+        </div>
+        <h1 class="video-title"><%= video.titulo %></h1>
+        <p class="music-title"><%= video.som %></p>
+        <video controls class="video-player">
+          <% console.log("Video Path:", video.video); %>
+          <source src="<%= video.video %>" type="video/mp4" />
+          Seu navegador não suporta o elemento de vídeo.
+        </video>
       </div>
-      <h1 class="video-title">Título do Vídeo</h1>
-      <p class="music-title">Nome da Música</p>
-      <video controls class="video-player">
-        <source src="video.mp4" type="video/mp4" />
-        Seu navegador não suporta o elemento de vídeo.
-      </video>
+      <% }); %>
     </div>
   </body>
 </html>

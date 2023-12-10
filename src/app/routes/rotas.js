@@ -7,14 +7,28 @@ module.exports = (app) => {
   const tikTokController = require("../controllers/con_ttk");
   const tikController = new tikTokController();
 
+  const bd = require("../../config/database");
+  const tikTokDAO = require("../bd/dao_ttk");
+  const usuarioDAO = new tikTokDAO(bd);
+
   app.get("/", (req, res) => {
     res.send("Aoba");
   });
 
-  app.get("/home", (req, res) => {
-    // armazena as info do usuario para aparecer quando ele logar
-    const user = req.session.user;
-    res.render("index", { user: user });
+  app.get("/home", async (req, res) => {
+    try {
+      const user = req.session.user;
+      const videos = await usuarioDAO.listarVideos();
+
+      videos.forEach((video) => {
+        console.log("Informações do Vídeo:", video);
+      });
+
+      res.render("index", { user, videos });
+    } catch (erro) {
+      console.error(erro);
+      res.status(500).send("Erro ao carregar vídeos");
+    }
   });
 
   app.get("/uploadVideo", (req, res) => {

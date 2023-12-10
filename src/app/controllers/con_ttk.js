@@ -46,9 +46,8 @@ class tiktokCON {
         .autenticarUsuario(email, senha)
         .then((usuario) => {
           if (usuario) {
-            // armazena as info do usuario no req.session
             req.session.user = {
-              id: usuario.id_user, // Altere para id_user, que é o nome correto do campo
+              id: usuario.id_user,
               nome: usuario.nome,
               apelido: usuario.apelido,
               email: usuario.email,
@@ -72,7 +71,6 @@ class tiktokCON {
         const usuarioDAO = new tikTokDAO(bd);
         const { titulo, som } = req.body;
 
-        // Obtém o ID do usuário da sessão
         const id_user = req.session.user.id;
 
         const videoPath = req.file.path;
