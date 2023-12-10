@@ -6,19 +6,12 @@
     senha_user varchar(12) not null
   )
 
-  create table tiktok_video(
-    id_video int auto_increment primary key,
-    titulo varchar(20) not null,
-    video varchar(255) not null, 
-    som varchar(50) not null,
-    id_user int not null,
-    foreign key (id_user) references tiktok_user(id_user)
-  )
-
-
-
-
-
-
-
-
+CREATE TABLE tiktok_video (
+  id_video INT AUTO_INCREMENT PRIMARY KEY,
+  titulo VARCHAR(20) NOT NULL,
+  video VARCHAR(255) NOT NULL, 
+  som VARCHAR(50) NOT NULL,
+  id_user INT NOT NULL,
+  data_postagem TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (id_user) REFERENCES tiktok_user(id_user)
+);
