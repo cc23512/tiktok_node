@@ -43,38 +43,86 @@
       </div>
     </header>
 
-     <div id="modal" class="modal">
+    <div id="modal" class="modal">
       <div class="modal-content">
         <span class="close" onclick="fecharModal()">&times;</span>
         <div id="loginForm" class="form-container">
           <h2>Entrar no Tik Tok</h2>
-
           <form action="/loginUsuario" method="post">
-
             <div class="label-group">
               <label for="email">Email</label> <br />
-              <i class="ri-mail-line"></i
-              ><input type="text" name="email" placeholder="Email" required />
+              <i class="ri-mail-line"></i>
+              <input type="text" name="email" placeholder="Email" required />
             </div>
             <br />
-
             <div class="label-group">
               <label for="senha">Senha</label> <br />
-              <i class="ri-lock-line"></i
-              ><input type="password" name="senha" placeholder="Senha" required /><br />
+              <i class="ri-lock-line"></i>
+              <input
+                type="password"
+                name="senha"
+                placeholder="Senha"
+                required
+              /><br />
             </div>
-            
             <button type="submit">Entrar</button>
+
+            <div class="footer-form">
+              <p>
+                Não tem uma conta?
+                <a href="#" onclick="abreCadastroFormulario()">Criar conta</a>
+              </p>
+            </div>
           </form>
-
-          <div class="footer-form">
-            <p>
-              Não tem uma conta?
-              <a href="#" onclick="showSignupForm()">Criar conta</a>
-            </p>
-          </div>
         </div>
-    </div>
 
+        <div id="cadastroForm" class="form-container" style="display: none">
+          <h2>Criar uma conta no Tik Tok</h2>
+          <form action="/inserirUsuario" method="post">
+            <div class="label-group">
+              <label for="nome">Nome</label> <br />
+              <i class="ri-user-line"></i>
+              <input type="text" name="nome" placeholder="Nome" required />
+            </div>
+            <br />
+            <div class="label-group">
+              <label for="apelido">Apelido</label> <br />
+              <i class="ri-at-line"></i>
+              <input
+                type="text"
+                name="apelido"
+                placeholder="Apelido"
+                required
+              />
+            </div>
+            <br />
+            <div class="label-group">
+              <label for="emailCadastro">Email</label> <br />
+              <i class="ri-mail-line"></i>
+              <input type="text" name="email" placeholder="Email" required />
+            </div>
+            <br />
+            <div class="label-group">
+              <label for="senhaCadastro">Senha</label> <br />
+              <i class="ri-lock-line"></i>
+              <input
+                type="password"
+                name="senha"
+                placeholder="Senha"
+                required
+              /><br />
+            </div>
+            <button type="submit">Criar Conta</button>
+
+            <div class="footer-form">
+              <p>
+                Já tem uma conta?
+                <a href="#" onclick="voltaParaLoginForm()">Entrar</a>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
