@@ -1,3 +1,5 @@
+const path = require("path"); // Remova esta linha
+
 module.exports = (app) => {
   app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -15,20 +17,18 @@ module.exports = (app) => {
     res.send("Aoba");
   });
 
-  app.get("/home", async (req, res) => {
-    try {
-      const user = req.session.user;
-      const videos = await usuarioDAO.listarVideos();
+  app.get("/home", (req, res) => {
+    const user = req.session.user;
 
-      videos.forEach((video) => {
-        console.log("Informações do Vídeo:", video);
+    usuarioDAO
+      .obterVideos()
+      .then((videos) => {
+        res.render("index", { user, videosTTK: videos });
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).send("Erro ao carregar a página inicial");
       });
-
-      res.render("index", { user, videos });
-    } catch (erro) {
-      console.error(erro);
-      res.status(500).send("Erro ao carregar vídeos");
-    }
   });
 
   app.get("/uploadVideo", (req, res) => {

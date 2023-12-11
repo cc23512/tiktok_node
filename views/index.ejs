@@ -142,7 +142,7 @@
     </div>
 
     <div id="videos">
-      <% videos.forEach(video => { %>
+      <% videosTTK.forEach(videoTTK => { %>
       <div class="video-container">
         <div class="user-info">
           <img
@@ -150,13 +150,21 @@
             alt="Profile Picture"
             class="profile-picture"
           />
-          <p class="username"><%= video.nome %> (<%= video.apelido %>)</p>
+          <p class="username"><%= videoTTK.apelido %></p>
         </div>
-        <h1 class="video-title"><%= video.titulo %></h1>
-        <p class="music-title"><%= video.som %></p>
+        <h1 class="video-title"><%= videoTTK.titulo %></h1>
+        <p class="music-title"><%= videoTTK.som %></p>
         <video controls class="video-player">
-          <% console.log("Video Path:", video.video); %>
-          <source src="<%= video.video %>" type="video/mp4" />
+          <source
+            src="<%= videoTTK.video.replace(/\\/g, '/').replace('views/', '') %>"
+            type="video/mp4"
+          />
+          <!-- replace substitua as barra invertidas \ por barras normais / para assim -->
+          <!-- o navegador ler a rota -->
+
+          <!-- e essa parte .replace('views/', '') é para remover o views do começo-->
+          <!-- pois no bd o video esta salvo na pasta /videos/arquivo.mp4 -->
+
           Seu navegador não suporta o elemento de vídeo.
         </video>
       </div>

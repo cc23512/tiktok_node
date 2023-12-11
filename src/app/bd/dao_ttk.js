@@ -54,17 +54,14 @@ class tikTokDAO {
     });
   }
 
-  listarVideos() {
+  obterVideos() {
     return new Promise((resolve, reject) => {
-      const sql =
-        "SELECT v.*, u.nome, u.apelido FROM tiktok_video v JOIN tiktok_user u ON v.id_user = u.id_user ORDER BY v.data_postagem DESC";
-
+      const sql = "SELECT * FROM tiktok_video ORDER BY data_postagem DESC"; // Adicione a cláusula ORDER BY
       this._bd.query(sql, (erro, resultados) => {
         if (erro) {
           console.error("Erro na consulta SQL:", erro);
-          return reject("Erro ao listar vídeos");
+          return reject("Erro ao obter vídeos");
         }
-
         resolve(resultados);
       });
     });
