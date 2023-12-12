@@ -39,24 +39,37 @@ class tikTokDAO {
     });
   }
 
-  inserirVideo(titulo, videoPath, som, id_user) {
+  inserirVideo(titulo, videoPath, som, id_user, curtidas) {
     return new Promise((resolve, reject) => {
       const sql =
-        "INSERT INTO tiktok_video (titulo, video, som, id_user) VALUES (?, ?, ?, ?)";
+        "INSERT INTO tiktok_video (titulo, video, som, id_user, curtidas) VALUES (?, ?, ?, ?, ?)";
 
-      this._bd.query(sql, [titulo, videoPath, som, id_user], (erro) => {
-        if (erro) {
-          console.log(erro);
-          return reject("Erro ao inserir vídeo");
+      this._bd.query(
+        sql,
+        [titulo, videoPath, som, id_user, curtidas],
+        (erro) => {
+          if (erro) {
+            console.log(erro);
+            return reject("Erro ao inserir vídeo");
+          }
+          resolve();
         }
-        resolve();
-      });
+      );
     });
   }
 
   obterVideos() {
     return new Promise((resolve, reject) => {
-      const sql = "SELECT * FROM tiktok_video ORDER BY data_postagem DESC"; // Adicione a cláusula ORDER BY
+      const sql = `
+        SELECT v.*, u.apelido AS apelido_usuario, u.nome AS nome_usuario
+        FROM tiktok_video v
+        JOIN tiktok_user u ON v.id_user = u.id_user
+        ORDER BY v.data_postagem DESC
+      `;
+      // seleciona tudo da tabela video, e apelido da tabela usuario é apelido_usuario
+      // ai o id_user da tabela video receebe o id_user da tabela usuario fazendo assim
+      // que os dados estejam relacionados e depois organiza os videos por ordem de
+      // postagem;
       this._bd.query(sql, (erro, resultados) => {
         if (erro) {
           console.error("Erro na consulta SQL:", erro);

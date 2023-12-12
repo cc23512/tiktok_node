@@ -1,5 +1,3 @@
-const path = require("path"); // Remova esta linha
-
 module.exports = (app) => {
   app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -33,10 +31,11 @@ module.exports = (app) => {
 
   app.get("/uploadVideo", (req, res) => {
     const user = req.session.user;
+
     if (user) {
       res.render("uploadVideo", { user: user, req });
     } else {
-      res.render("index", { mostrarPopup: true });
+      res.redirect("/home");
     }
   });
 

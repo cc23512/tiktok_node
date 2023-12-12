@@ -293,46 +293,73 @@ header {
   text-decoration: underline;
 }
 
+/* VIDEO CONTAINER */
+
 .video-container {
-  max-width: 500px;
   width: 100%;
-  margin: 20px auto;
-  background-color: #fff;
-  padding: 20px;
-}
-
-.user-info {
+  height: auto;
   display: flex;
-  align-items: center;
-  margin-bottom: 10px;
+  padding: 30px;
 }
 
-.user-info .profile-picture {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-
-.username {
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-
-.video-title {
-  font-size: 1.5rem;
-  margin-bottom: 5px;
-}
-
-.music-title {
-  font-size: 1rem;
-  color: #888;
+.video-content {
+  width: 500px;
+  height: auto;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 100px 1fr 70px;
 }
 
 .video-player {
   width: 100%;
-  height: 800px;
+  height: auto;
+  border-radius: 8px;
 }
+
+.buttons {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.buttons-content {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  text-align: center;
+  bottom: 12rem;
+  right: 50%;
+  transform: translateX(50%);
+}
+
+.buttons-content i {
+  color: #161823;
+  background: #f1f1f2;
+  padding: 6px;
+  font-size: 2rem;
+  border-radius: 50%;
+  margin: 1rem;
+  cursor: pointer;
+  transition: 0.5s all ease;
+}
+
+.buttons-content i:hover {
+  color: var(--vermelho-rosa);
+}
+
+.buttons-content p {
+  padding-top: 0.5rem;
+  font-family: var(--semiBold);
+}
+
+.profile-user img {
+  width: 56px;
+  border-radius: 100%;
+  float: right;
+  margin-right: 10px;
+}
+
+/* POP UP NAO LOGADO */
 
 .popup {
   display: none;

@@ -141,34 +141,37 @@
       </div>
     </div>
 
-    <div id="videos">
-      <% videosTTK.forEach(videoTTK => { %>
-      <div class="video-container">
-        <div class="user-info">
-          <img
-            src="profile.jpg"
-            alt="Profile Picture"
-            class="profile-picture"
-          />
-          <p class="username"><%= videoTTK.apelido %></p>
+    <div class="video-container">
+      <div class="video-content">
+        <div class="profile-user">
+          <img src="./images/teste.jpg" alt="" />
         </div>
-        <h1 class="video-title"><%= videoTTK.titulo %></h1>
-        <p class="music-title"><%= videoTTK.som %></p>
-        <video controls class="video-player">
-          <source
-            src="<%= videoTTK.video.replace(/\\/g, '/').replace('views/', '') %>"
-            type="video/mp4"
-          />
-          <!-- replace substitua as barra invertidas \ por barras normais / para assim -->
-          <!-- o navegador ler a rota -->
+        <div class="video-player-container">
+          <% videosTTK.forEach(videoTTK => { %>
+          <div class="user-information">
+            <h2><%= videoTTK.nome_usuario %></h2>
+          </div>
+          <video controls class="video-player">
+            <source
+              src="<%= videoTTK.video.replace(/\\/g, '/').replace('views/', '') %>"
+              type="video/mp4"
+            />
+            <!-- replace substitui as barras invertidas \ por barras normais / para assim -->
+            <!-- o navegador ler a rota -->
 
-          <!-- e essa parte .replace('views/', '') é para remover o views do começo-->
-          <!-- pois no bd o video esta salvo na pasta /videos/arquivo.mp4 -->
-
-          Seu navegador não suporta o elemento de vídeo.
-        </video>
+            <!-- e essa parte .replace('views/', '') é para remover o views do começo-->
+            <!-- pois no bd o vídeo está salvo na pasta /videos/arquivo.mp4 -->
+            Seu navegador não suporta o elemento de vídeo.
+          </video>
+        </div>
+        <div class="buttons">
+          <div class="buttons-content">
+            <span><i class="ri-heart-3-fill"></i></span>
+            <p><%= videoTTK.curtidas %></p>
+          </div>
+        </div>
+        <% }); %>
       </div>
-      <% }); %>
     </div>
   </body>
 </html>

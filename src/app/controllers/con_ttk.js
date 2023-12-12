@@ -72,11 +72,12 @@ class tiktokCON {
         const { titulo, som } = req.body;
 
         const id_user = req.session.user.id;
+        const curtidas = 0; // Definindo a variável antes de utilizá-la
 
         const videoPath = req.file.path;
 
         usuarioDAO
-          .inserirVideo(titulo, videoPath, som, id_user)
+          .inserirVideo(titulo, videoPath, som, id_user, curtidas)
           .then(() => {
             console.log("Vídeo inserido com sucesso");
             res.redirect("/home");
