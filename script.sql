@@ -12,6 +12,7 @@ CREATE TABLE tiktok_video (
   video VARCHAR(255) NOT NULL, 
   som VARCHAR(50) NOT NULL,
   id_user INT NOT NULL,
+  curtidas INT NOT NULL,
   data_postagem TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (id_user) REFERENCES tiktok_user(id_user)
 );
