@@ -1,5 +1,6 @@
 function abrirModal() {
   document.getElementById("modal").style.display = "block";
+  console.log("abriu modal");
 }
 
 function fecharModal() {
@@ -31,3 +32,5 @@ function abrirPopup(mensagem) {
 function fecharPopup() {
   document.getElementById("popup").style.display = "none";
 }
+
+// CURTIDAS

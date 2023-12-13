@@ -141,37 +141,88 @@
       </div>
     </div>
 
-    <div class="video-container">
-      <div class="video-content">
-        <div class="profile-user">
-          <img src="./images/teste.jpg" alt="" />
+    <% videosTTK.forEach(videoTTK => { %>
+  <div class="video-container">
+    <div class="video-content">
+      <div class="profile-user">
+        <img src="./images/teste.jpg" alt="" />
+      </div>
+      <div class="video-player-container">
+        <div class="user-information">
+          <h2><%= videoTTK.nome_usuario %></h2>
         </div>
-        <div class="video-player-container">
-          <% videosTTK.forEach(videoTTK => { %>
-          <div class="user-information">
-            <h2><%= videoTTK.nome_usuario %></h2>
-          </div>
-          <video controls class="video-player">
-            <source
-              src="<%= videoTTK.video.replace(/\\/g, '/').replace('views/', '') %>"
-              type="video/mp4"
-            />
-            <!-- replace substitui as barras invertidas \ por barras normais / para assim -->
-            <!-- o navegador ler a rota -->
+        <video controls class="video-player">
+          <source
+            src="<%= videoTTK.video.replace(/\\/g, '/').replace('views/', '') %>"
+            type="video/mp4"
+          />
+          Seu navegador não suporta o elemento de vídeo.
+          <!-- replace substitui as barras invertidas \ por barras normais / para assim -->
+          <!-- o navegador ler a rota -->
 
-            <!-- e essa parte .replace('views/', '') é para remover o views do começo-->
-            <!-- pois no bd o vídeo está salvo na pasta /videos/arquivo.mp4 -->
-            Seu navegador não suporta o elemento de vídeo.
-          </video>
+          <!-- e essa parte .replace('views/', '') é para remover o views do começo-->
+          <!-- pois no bd o vídeo está salvo na pasta /videos/arquivo.mp4 -->
+        </video>
+      </div>
+      <div class="buttons">
+        <div class="buttons-content">
+          <span
+            id="curtida_<%= videoTTK.id_video %>"
+            data-video-id="<%= videoTTK.id_video %>"
+            data-usuario-id="<%= user ? user.id : '' %>"
+            onclick="curtirVideo(this)"
+            class="<%= videoTTK.curtiu ? 'curtido' : '' %>"
+          >
+            <i class="ri-heart-fill"></i>
+          </span>
+          <p id="curtidas_<%= videoTTK.id_video %>">
+            <%= videoTTK.curtidas %>
+          </p>
         </div>
-        <div class="buttons">
-          <div class="buttons-content">
-            <span><i class="ri-heart-3-fill"></i></span>
-            <p><%= videoTTK.curtidas %></p>
-          </div>
-        </div>
-        <% }); %>
       </div>
     </div>
+  </div>
+<% }); %>
+
+    <script>
+      function curtirVideo(element) {
+        const videoId = element.getAttribute("data-video-id");
+        const usuarioId = element.getAttribute("data-usuario-id");
+
+        // Adicione lógica aqui para verificar se o usuário está logado
+        if (!usuarioId) {
+          alert("Você precisa estar logado para curtir o vídeo.");
+          return;
+        }
+
+        // Adicione lógica aqui para verificar se o usuário já curtiu o vídeo
+        const usuarioJaCurtiu = element.classList.contains("curtido");
+
+        if (usuarioJaCurtiu) {
+          alert("Você já curtiu este vídeo.");
+          return;
+        }
+
+        // Envie uma requisição AJAX para o servidor para registrar a curtida
+        fetch(`/curtirVideo/${videoId}/${usuarioId}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // Atualize o número de curtidas na interface
+            const curtidasElement = document.getElementById(
+              `curtidas_${videoId}`
+            );
+            curtidasElement.innerText = data.curtidas;
+
+            // Adicione a classe "curtido" ao ícone de curtida
+            element.classList.add("curtido");
+          })
+          .catch((error) => console.error("Erro ao curtir o vídeo:", error));
+      }
+    </script>
   </body>
 </html>

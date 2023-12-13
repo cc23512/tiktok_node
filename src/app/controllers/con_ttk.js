@@ -89,6 +89,7 @@ class tiktokCON {
       },
     ];
   }
+  
 }
 
 module.exports = tiktokCON;

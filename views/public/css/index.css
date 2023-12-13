@@ -332,23 +332,21 @@ header {
   transform: translateX(50%);
 }
 
-.buttons-content i {
+.buttons-content span {
   color: #161823;
   background: #f1f1f2;
   padding: 6px;
   font-size: 2rem;
   border-radius: 50%;
-  margin: 1rem;
   cursor: pointer;
-  transition: 0.5s all ease;
+  transition: 0.8s all ease;
 }
 
-.buttons-content i:hover {
-  color: var(--vermelho-rosa);
+#curtida.pressed {
+  filter: brightness(80%);
 }
 
 .buttons-content p {
-  padding-top: 0.5rem;
   font-family: var(--semiBold);
 }
 
