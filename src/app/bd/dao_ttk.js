@@ -80,88 +80,55 @@ class tikTokDAO {
     });
   }
 
-  verificarCurtida(usuarioId, videoId) {
-    const sql = "SELECT * FROM curtidas WHERE id_user = ? AND id_video = ?";
+  verificarCurtida(videoId, userId) {
     return new Promise((resolve, reject) => {
-      this._bd.query(sql, [usuarioId, videoId], (erro, resultado) => {
+      const sql = "SELECT * FROM curtidas WHERE id_video = ? AND id_user = ?";
+      this._bd.query(sql, [videoId, userId], (erro, resultados) => {
         if (erro) {
-          console.error("Erro ao verificar a curtida:", erro);
-          reject(erro);
-        } else {
-          resolve(resultado.length > 0);
+          console.error("Erro ao verificar curtida:", erro);
+          return reject("Erro ao verificar curtida");
         }
+
+        resolve(resultados.length > 0); // Se houver resultados, significa que a curtida existe
       });
     });
   }
 
-  registrarCurtida(usuarioId, videoId) {
-    const selectCurtidaSql = "SELECT * FROM curtidas WHERE id_user = ? AND id_video = ?";
-    const insertCurtidaSql = "INSERT INTO curtidas (id_user, id_video) VALUES (?, ?)";
-    const updateCurtidasSql = "UPDATE tiktok_video SET curtidas = curtidas + 1 WHERE id_video = ?";
-
+  darCurtida(idVideo, userId) {
     return new Promise((resolve, reject) => {
-      this._bd.beginTransaction((err) => {
-        if (err) {
-          console.error("Erro ao iniciar a transação:", err);
-          reject(err);
+      const sql =
+        "UPDATE tiktok_video SET curtidas = curtidas + 1 WHERE id_video = ?";
+      this._bd.query(sql, [idVideo], (erro) => {
+        if (erro) {
+          console.error("Erro ao dar curtida:", erro);
+          return reject("Erro ao dar curtida");
         }
-
-        // Verifica se já existe uma curtida do usuário no vídeo
-        this._bd.query(selectCurtidaSql, [usuarioId, videoId], (err, results) => {
-          if (err) {
-            this._bd.rollback(() => reject(err));
+        this._bd.query(
+          "SELECT curtidas FROM tiktok_video WHERE id_video = ?",
+          [idVideo],
+          (erro, resultados) => {
+            if (erro) {
+              console.error("Erro ao obter número de curtidas:", erro);
+              return reject("Erro ao obter número de curtidas");
+            }
+            const curtidas = resultados[0] ? resultados[0].curtidas : 0;
+            resolve(curtidas);
           }
-
-          if (results.length === 0) {
-            // Se o usuário ainda não curtiu, insere a curtida e atualiza o número de curtidas
-            this._bd.query(insertCurtidaSql, [usuarioId, videoId], (err) => {
-              if (err) {
-                this._bd.rollback(() => reject(err));
-              }
-
-              this._bd.query(updateCurtidasSql, [videoId], (err) => {
-                if (err) {
-                  this._bd.rollback(() => reject(err));
-                }
-
-                this._bd.commit((err) => {
-                  if (err) {
-                    this._bd.rollback(() => reject(err));
-                  }
-                  resolve();
-                });
-              });
-            });
-          } else {
-            // Se o usuário já curtiu, apenas atualiza o número de curtidas
-            this._bd.query(updateCurtidasSql, [videoId], (err) => {
-              if (err) {
-                this._bd.rollback(() => reject(err));
-              }
-
-              this._bd.commit((err) => {
-                if (err) {
-                  this._bd.rollback(() => reject(err));
-                }
-                resolve();
-              });
-            });
-          }
-        });
+        );
       });
     });
   }
 
-  obterNumeroCurtidas(videoId) {
-    const sql = "SELECT COUNT(*) as curtidas FROM curtidas WHERE id_video = ?";
+  removerCurtida(videoId, userId) {
     return new Promise((resolve, reject) => {
-      this._bd.query(sql, [videoId], (erro, resultado) => {
+      const sql = "DELETE FROM curtidas WHERE id_video = ? AND id_user = ?";
+      this._bd.query(sql, [videoId, userId], (erro) => {
         if (erro) {
-          console.error("Erro ao obter o número de curtidas:", erro);
-          reject(erro);
-        } else {
-          resolve(resultado[0].curtidas);
+          console.error("Erro ao remover curtida:", erro);
+          return reject("Erro ao remover curtida");
         }
+
+        resolve();
       });
     });
   }

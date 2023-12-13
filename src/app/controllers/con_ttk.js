@@ -89,7 +89,47 @@ class tiktokCON {
       },
     ];
   }
-  
+
+  darCurtida() {
+    return function (req, res) {
+      const usuarioDAO = new tikTokDAO(bd);
+      const { videoId } = req.body;
+      const userId = req.session.user.id;
+
+      usuarioDAO
+        .verificarCurtida(videoId, userId) // Método a ser implementado no seu DAO
+        .then((curtidaExiste) => {
+          if (!curtidaExiste) {
+            usuarioDAO
+              .darCurtida(videoId, userId)
+              .then(() =>
+                res.json({
+                  success: true,
+                  message: "Curtida adicionada com sucesso",
+                })
+              )
+              .catch((error) =>
+                res.status(500).json({ success: false, message: error })
+              );
+          } else {
+            usuarioDAO
+              .removerCurtida(videoId, userId)
+              .then(() =>
+                res.json({
+                  success: true,
+                  message: "Curtida removida com sucesso",
+                })
+              )
+              .catch((error) =>
+                res.status(500).json({ success: false, message: error })
+              );
+          }
+        })
+        .catch((error) =>
+          res.status(500).json({ success: false, message: error })
+        );
+    };
+  }
 }
 
 module.exports = tiktokCON;

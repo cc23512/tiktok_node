@@ -14,6 +14,7 @@ app.use(
 
 app.use(express.static("public"));
 app.use(express.static("views"));
+app.use(express.json());
 app.use("/videos", express.static(path.join(__dirname, "views/videos")));
 
 app.use(bodyParser.urlencoded({ extended: true }));
