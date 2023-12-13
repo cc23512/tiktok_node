@@ -16,12 +16,3 @@ CREATE TABLE tiktok_video (
   data_postagem TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (id_user) REFERENCES tiktok_user(id_user)
 );
-
-CREATE TABLE curtidas (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  id_video INT NOT NULL,
-  id_user INT NOT NULL,
-  FOREIGN KEY (id_video) REFERENCES tiktok_video(id_video),
-  FOREIGN KEY (id_user) REFERENCES tiktok_user(id_user),
-  UNIQUE KEY unique_curtida (id_video, id_user)
-);
